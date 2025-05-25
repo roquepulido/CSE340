@@ -1,0 +1,10 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/')} %>
+
+    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmZkaXQ3bzVyeG9vdmd4aDRvNGFtdDU0MnJyYzA0eWFidG9wbnlqdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rZYf7RpRvRWOaMCCZz/giphy.gif" alt="gif error">
+    <div class="error-message">
+        <%= message %>
+    </div>
