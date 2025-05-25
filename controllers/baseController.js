@@ -6,4 +6,10 @@ baseController.buildHome = async function (req, res) {
   res.render("index", { title: "Home", nav });
 };
 
+baseController.error = async function (req, res) {
+  const err = new Error( "Error in server try later.");
+  err.status = 500;
+  throw err;
+};
+
 module.exports = baseController;
