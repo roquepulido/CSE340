@@ -1,0 +1,32 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+        <%- messages() %>
+
+                    <form class="form" method="post" action="/account/register">
+                        <span class="required-message">* All fields are required</span>
+                        <label>
+                            First Name: <input type="text" name="account_firstname" required
+                                value="<%= locals.account_firstname %>" />
+                        </label>
+                        <label>
+                            Last Name: <input type="text" name="account_lastname" required
+                                value="<%= locals.account_lastname %>" />
+                        </label>
+                        <label>
+                            Email: <input type="email" name="account_email" placeholder="example@example.com" required
+                                value="<%= locals.account_email %>" />
+                        </label>
+                        <label>
+                            Password: <input type="password" name="account_password"
+                                placeholder="Insert your password here" required
+                                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" />
+                        </label>
+                        <button type="submit">Register</button>
+                        <p id="password-rules">Password must be minimum of 12 characters and include 1 capital letter, 1
+                            number, and 1 special character.</p>
+                        <p id="no-account">Already have an account? <a href="/account/login">Login</a></p>
+                        </form>
