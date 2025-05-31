@@ -290,6 +290,7 @@ nav ul li:hover {
   color: #ff0000;
   margin-top: .5rem;
 }
+/* TODO CSS for login form */
 @media screen and (max-width: 600px) {
   body {
     width: 95%;
