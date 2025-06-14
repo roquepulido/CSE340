@@ -34,15 +34,23 @@ Util.buildClassificationGrid = async function (data) {
     data.forEach((vehicle) => {
       grid += /*html*/ `
       <li>
-        <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
-        <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make } ${vehicle.inv_model} on CSE Motors" /></a>
+        <a href="../../inv/detail/${vehicle.inv_id}" title="View ${
+        vehicle.inv_make
+      } ${vehicle.inv_model} details">
+        <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${
+        vehicle.inv_model
+      } on CSE Motors" /></a>
         <div class="namePrice">
           <h2>
-            <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
+            <a href="../../inv/detail/${vehicle.inv_id}" title="View ${
+        vehicle.inv_make
+      } ${vehicle.inv_model} details">
             ${vehicle.inv_make} ${vehicle.inv_model}
             </a>
           </h2>
-          <span class="price">$ ${new Intl.NumberFormat("en-US").format(vehicle.inv_price)}</span>
+          <span class="price">$ ${new Intl.NumberFormat("en-US").format(
+            vehicle.inv_price
+          )}</span>
         </div>
       </li>
       `;
@@ -60,7 +68,9 @@ Util.buildClassificationGrid = async function (data) {
 Util.buildDetailView = async function (data) {
   return /*html*/ `
  <div class="detail-view">
-  <img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model}" />
+  <img src="${data.inv_image}" alt="Image of ${data.inv_make} ${
+    data.inv_model
+  }" />
   <h2 class="detail-title">${data.inv_make} ${data.inv_model}</h2>
   <p class="description">Description: ${data.inv_description}</p>
   <p class="year">Year: ${data.inv_year}</p>
@@ -82,5 +92,27 @@ Util.buildDetailView = async function (data) {
  **************************************** */
 Util.handleErrors = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
+
+/* **************************************
+ * Build the classification list HTML
+ * ************************************ */
+Util.getCatClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications();
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"';
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected ";
+    }
+    classificationList += ">" + row.classification_name + "</option>";
+  });
+  classificationList += "</select>";
+  return classificationList;
+};
 
 module.exports = Util;

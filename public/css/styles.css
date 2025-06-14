@@ -290,6 +290,21 @@ nav ul li:hover {
   color: #ff0000;
   margin-top: .5rem;
 }
+.notice {
+  background-color: #eaf4ff;
+  border: 1.5px solid #3399ff;
+  color: #1160a0;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  list-style-type: disc;
+}
+.notice li {
+  color: #1160a0;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-left: 1.5rem;
+}
 /* TODO CSS for login form */
 @media screen and (max-width: 600px) {
   body {
@@ -335,4 +350,66 @@ nav ul li:hover {
   .detail-view .miles{
     position: static;
   }
+}
+
+/* Estilos para formularios */
+.form {
+  background: #f4faff;
+  border: 1.5px solid #b3d8ff;
+  border-radius: 0.7rem;
+  padding: 2rem 2.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 2px 8px rgba(51, 153, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #1160a0;
+  margin-bottom: 0.5rem;
+}
+.form input[type="text"],
+.form input[type="number"],
+.form textarea {
+  padding: 0.6rem 1rem;
+  border: 1.2px solid #b3d8ff;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+.form input[type="text"]:focus,
+.form input[type="number"]:focus,
+.form textarea:focus {
+  border-color: #3399ff;
+  outline: none;
+}
+.form button[type="submit"] {
+  background: #1160a0;
+  color: #fff;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.form button[type="submit"]:hover {
+  background: #3399ff;
+}
+.form .required-message {
+  color: #1160a0;
+  font-size: 0.95rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+#classification-rules {
+  color: #3399ff;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
 }
