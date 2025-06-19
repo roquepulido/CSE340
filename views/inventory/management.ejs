@@ -1,21 +1,27 @@
 <% if (title) { %>
-    <h1>
-        <%= title %>
-    </h1>
-    <% } else { res.redirect('/') } %>
+  <h1>
+    <%= title %>
+  </h1>
+  <% } else { res.redirect('/') } %>
 
-        <%- messages() %>
-            <% if (errors) { %>
-                <ul class="notice">
-                    <% errors?.array().forEach(error=> { %>
-                        <li>
-                            <%= error.msg %>
-                        </li>
-                        <% }) %>
-                </ul>
-                <% } %>
+    <%- messages() %>
+      <% if (errors) { %>
+        <ul class="notice">
+          <% errors?.array().forEach(error=> { %>
+            <li>
+              <%= error.msg %>
+            </li>
+            <% }) %>
+        </ul>
+        <% } %>
 
-                    <ul id="inventory-menu">
-                        <li><a href="/inv/classification/add">Add new classification</a></li>
-                        <li><a href="/inv/add">Add new inventory item</a></li>
-                    </ul>
+          <ul id="inventory-menu">
+            <li><a href="/inv/new/classification">Add new classification</a></li>
+            <li><a href="/inv/new/inventory">Add new inventory item</a></li>
+          </ul>
+          <h2 id="h2-management">Manage Inventory</h2>
+          <p id="p-management">Choose a classification to see those inventory items.</p>
+          <%- classificationSelect %>
+            <table id="inventoryDisplay"></table>
+            <noscript>JavaScript must be enabled to use this page.</noscript>
+            <script src="../../js/inventory.js"></script>

@@ -1,0 +1,123 @@
+<% if (title) { %>
+  <h1>
+    <%= title %>
+  </h1>
+  <% } else { res.redirect('/') } %>
+
+    <%- messages() %>
+
+      <% if (errors) { %>
+        <ul class="notice">
+          <% errors?.array().forEach(error=> { %>
+            <li>
+              <%= error.msg %>
+            </li>
+            <% }) %>
+        </ul>
+        <% } %>
+
+          <h2 class="h2Pending">Classifications</h2>
+          <section class="tableContainer">
+            <% if (classifications.length===0) { %>
+              <p class="no-items-message">No pending classifications for approval.</p>
+              <% } else { %>
+                <table border="1" class="tableData">
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                  </tr>
+                  <% classifications.forEach(classification=> { %>
+                    <tr>
+                      <td>
+                        <%= classification.classification_id %>
+                      </td>
+                      <td>
+                        <%= classification.classification_name %>
+                      </td>
+                      <td>
+                        <div class="btnContainer">
+                          <form action="/inv/classification/approve" method="post">
+                            <button type="submit" class="btn btnApprove" name="classification_id"
+                              value="<%= classification.classification_id %>">✅</button>
+                          </form>
+                          <form action="/inv/classification/reject" method="post">
+                            <button type="submit" class="btn btnReject" name="classification_id"
+                              value="<%= classification.classification_id %>">❌</button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    <% }) %>
+                </table>
+                <% } %>
+          </section>
+
+          <h2 class="h2Pending last">Inventory</h2>
+          <section class="tableContainer">
+            <% if (inventory.length===0) { %>
+              <p class="no-items-message">No pending inventory items for approval.</p>
+              <% } else { %>
+                <table border="1" class="tableData">
+                  <tr>
+                    <th>ID</th>
+                    <th>Thumbnail</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Price</th>
+                    <th>Classification</th>
+                    <th>Actions</th>
+                  </tr>
+                  <% inventory.forEach(item=> { %>
+                    <tr>
+                      <td>
+                        <%= item.inv_id %>
+                      </td>
+                      <td><img src="<%= item.inv_thumbnail %>"
+                          alt="Thumbnail of <%= item.inv_make %> <%= item.inv_model %>" width="50"></td>
+                      <td>
+                        <%= item.inv_make %>
+                      </td>
+                      <td>
+                        <%= item.inv_model %>
+                      </td>
+                      <td>
+                        <%= item.inv_year %>
+                      </td>
+                      <td>$<%= new Intl.NumberFormat('en-US').format(item.inv_price) %>
+                      </td>
+                      <td>
+                        <%= item.classification_name %>
+                      </td>
+                      <td>
+                        <div class="btnContainer">
+                          <button type="button" class="btn btnInfo" data-info='<%= JSON.stringify(item) %>'>ℹ️</button>
+                          <form action="/inv/inventory/approve" method="post">
+                            <button type="submit" class="btn btnApprove" <%=!item.classification_approved ? 'disabled'
+                              : '' %> name="inv_id" value="<%= item.inv_id %>">✅</button>
+                          </form>
+                          <form action="/inv/inventory/reject" method="post">
+                            <button type="submit" class="btn btnReject" name="inv_id"
+                              value="<%= item.inv_id %>">❌</button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    <% }) %>
+                </table>
+                <% } %>
+          </section>
+
+          <div id="infoModal" class="modal hidden">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2 id="modalName">Inventory Information</h2>
+              <img id="modalImage" src="" alt="Full Image" class="modal-image">
+              <p><strong>Description:</strong> <span id="modalDescription"></span></p>
+              <p><strong>Miles:</strong> <span id="modalMiles"></span></p>
+              <p><strong>Color:</strong> <span id="modalColor"></span></p>
+            </div>
+          </div>
+
+          <script src="../js/modal.js" defer></script>

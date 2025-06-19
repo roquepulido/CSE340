@@ -1,25 +1,31 @@
 <% if (title) { %>
-<h1><%= title %></h1>
-<% } else { res.redirect('/') } %>
+  <h1>
+    <%= title %>
+  </h1>
+  <% } else { res.redirect('/') } %>
 
-<%- messages() %>
-<% if (errors) { %>
-<ul class="notice">
-  <% errors?.array().forEach(error => { %>
-  <li><%= error.msg %></li>
-  <%  }) %>
-</ul>
-<% } %>
+    <%- messages() %>
+      <% if (errors) { %>
+        <ul class="notice">
+          <% errors?.array().forEach(error=> { %>
+            <li>
+              <%= error.msg %>
+            </li>
+            <% }) %>
+        </ul>
+        <% } %>
 
-<h2 id="welcomeManagement">Welcome, <%= locals.accountData.account_firstname %></h2>
-<p>You're logged in</p>
-<p id="editAccountLink"><a href="/account/edit/<%= locals.accountData.account_id %>">Edit account information</a></p>
+          <h2 id="welcomeManagement">Welcome, <%= locals.accountData.account_firstname %>
+          </h2>
+          <p>You're logged in</p>
+          <p id="editAccountLink"><a href="/account/edit/<%= locals.accountData.account_id %>">Edit account
+              information</a></p>
 
-<% if (locals.accountData.account_type === 'Admin' || locals.accountData.account_type === 'Employee') { %>
-<h3 id="inventorySubtitle">Inventory Management</h3>
-<p class="managementP"><a href="/inv">Manage Inventory</a></p>
-<% } %>
+          <% if (locals.accountData.account_type==='Admin' || locals.accountData.account_type==='Employee' ) { %>
+            <h3 id="inventorySubtitle">Inventory Management</h3>
+            <p class="managementP"><a href="/inv">Manage Inventory</a></p>
+            <% } %>
 
-<% if (locals.accountData.account_type === 'Admin') { %>
-<p><a href="/inv/pending">View inventory and classification pending approval</a></p>
-<% } %>
+              <% if (locals.accountData.account_type==='Admin' ) { %>
+                <p><a href="/inv/pending">View inventory and classification pending approval</a></p>
+                <% } %>

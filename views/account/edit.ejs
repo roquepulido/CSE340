@@ -1,35 +1,42 @@
 <% if (title) { %>
-<h1><%= title %></h1>
-<% } else { res.redirect('/') } %>
+  <h1>
+    <%= title %>
+  </h1>
+  <% } else { res.redirect('/') } %>
 
-<%- messages() %>
-<% if (errors) { %>
-<ul class="notice">
-  <% errors?.array().forEach(error => { %>
-  <li><%= error.msg %></li>
-  <%  }) %>
-</ul>
-<% } %>
+    <%- messages() %>
+      <% if (errors) { %>
+        <ul class="notice">
+          <% errors?.array().forEach(error=> { %>
+            <li>
+              <%= error.msg %>
+            </li>
+            <% }) %>
+        </ul>
+        <% } %>
 
-<form class="form" method="post" action="/account/update">
-  <span class="required-message">* All fields are required</span>
-  <label>
-    First Name: <input type="text" name="account_firstname" required value="<%= locals.account_firstname %>">
-  </label>
-  <label>
-    Last Name: <input type="text" name="account_lastname" required value="<%= locals.account_lastname %>">
-  </label>
-  <label>
-    Email: <input type="email" name="account_email" placeholder="example@example.com" required value="<%= locals.account_email %>">
-  </label>
-  <button type="submit" name="account_id" value="<%= locals.account_id %>">Update</button>
-</form>
-<h2 id="welcomeManagement">Update password</h2>
-<form class="form" method="post" action="/account/update/password">
-  <span class="required-message">* This will change your current password</span>
-  <label>
-    New password: <input type="password" name="account_password" placeholder="Insert your new password here" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-  </label>
-  <p id="password-rules">Password must be minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.</p>
-  <button type="submit" name="account_id" value="<%= locals.account_id %>">Update password</button>
-</form>
+          <form class="form" method="post" action="/account/update">
+            <span class="required-message">* All fields are required</span>
+            <label>
+              First Name: <input type="text" name="account_firstname" required value="<%= locals.account_firstname %>">
+            </label>
+            <label>
+              Last Name: <input type="text" name="account_lastname" required value="<%= locals.account_lastname %>">
+            </label>
+            <label>
+              Email: <input type="email" name="account_email" placeholder="example@example.com" required
+                value="<%= locals.account_email %>">
+            </label>
+            <button type="submit" name="account_id" value="<%= locals.account_id %>">Update</button>
+          </form>
+          <h2 id="welcomeManagement">Update password</h2>
+          <form class="form" method="post" action="/account/update/password">
+            <span class="required-message">* This will change your current password</span>
+            <label>
+              New password: <input type="password" name="account_password" placeholder="Insert your new password here"
+                required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            </label>
+            <p id="password-rules">Password must be minimum of 12 characters and include 1 capital letter, 1 number, and
+              1 special character.</p>
+            <button type="submit" name="account_id" value="<%= locals.account_id %>">Update password</button>
+          </form>

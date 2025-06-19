@@ -1,0 +1,42 @@
+<% if (title) { %>
+  <h1>
+    <%= title %>
+  </h1>
+  <% } else { res.redirect('/') } %> <%- messages() %>
+      <% if (errors) { %>
+        <ul class="notice">
+          <% errors?.array().forEach(error=> { %>
+            <li>
+              <%= error.msg %>
+            </li>
+            <% }) %>
+        </ul>
+        <% } %>
+
+          <form action="/inv/delete" method="post" class="form" id="updateForm">
+            <span class="required-message">* Confirm Deletion - The delete is permanent.</span>
+            <label>
+              Make:
+              <input readonly type="text" name="inv_make" required pattern="^[A-Za-z0-9 ]+$"
+                title="Make must contain only letters, numbers, and spaces." value="<%= locals.inv_make %>" />
+            </label>
+            <label>
+              Model:
+              <input readonly type="text" name="inv_model" required pattern="^[A-Za-z0-9 ]+$"
+                title="Model must contain only letters, numbers, and spaces." value="<%= locals.inv_model %>" />
+            </label>
+            <label>
+              Price:
+              <input readonly type="number" name="inv_price" required min="0" step="0.01"
+                title="Price must be a positive number with up to two decimal places."
+                value="<%= locals.inv_price %>" />
+            </label>
+            <label>
+              Year:
+              <input readonly type="number" name="inv_year" required min="1886" max="<%= new Date().getFullYear() %>"
+                title="Year must be between 1886 and the current year." value="<%= locals.inv_year %>" />
+            </label>
+
+            <button type="submit">Delete Vehicle</button>
+            <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
+          </form>

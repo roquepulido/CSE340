@@ -13,11 +13,11 @@
         </ul>
         <% } %>
 
-          <form action="/inv/new/inventory" method="post" class="form">
+          <form action="/inv/update" method="post" class="form" id="updateForm">
             <span class="required-message">* All fields are required</span>
             <label>
               Classification:
-              <%- selectClassification %>
+              <%- classificationSelect %>
             </label>
             <label>
               Make:
@@ -69,5 +69,8 @@
                 title="Color must contain only alphabetic characters." value="<%= locals.inv_color %>" />
             </label>
 
-            <button type="submit">Add</button>
+            <button type="submit" disabled>Update Vehicle</button>
+            <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
           </form>
+
+          <script src="../../js/inv-update.js" defer></script>

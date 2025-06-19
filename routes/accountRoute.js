@@ -1,9 +1,8 @@
-// Needed Resources
+const regValidate = require("../utilities/account-validation");
 const express = require("express");
 const router = new express.Router();
 const accountController = require("../controllers/accountController");
-const utilities = require("../utilities/");
-const regValidate = require("../utilities/account-validation");
+const utilities = require("../utilities");
 
 router.get(
   "/",
@@ -14,14 +13,6 @@ router.get(
 
 // Route to build inventory by classification view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
-
-// Process the login attempt
-router.post(
-  "/login",
-  regValidate.loginRules(),
-  regValidate.checkLoginData,
-  utilities.handleErrors(accountController.accountLogin)
-);
 
 router.get(
   "/register",
@@ -41,6 +32,14 @@ router.post(
   regValidate.registationRules(),
   regValidate.checkRegData,
   utilities.handleErrors(accountController.registerAccount)
+);
+
+// Process the login attempt
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
 );
 
 // Process the update attempt
