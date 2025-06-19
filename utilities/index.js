@@ -120,6 +120,7 @@ Util.getCatClassificationList = async function (classification_id = null) {
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
+  console.debug("checkJWTToken called");
   if (req.cookies.jwt) {
    jwt.verify(
     req.cookies.jwt,
